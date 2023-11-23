@@ -15,7 +15,13 @@ public class Horse {
     }
 
     public int getSpeed() {
-        speed += HorseThread.changeSpeed();
+        if (speed > 70) {
+            speed = speed;
+        } else if (speed < 15) {
+            speed = speed;
+        } else {
+            speed += HorseThread.changeSpeed();
+        }
         return speed;
     }
 
@@ -24,6 +30,6 @@ public class Horse {
     }
 
     public int move() {
-        return distance += (int) (speed / 100);
+        return distance += (int) (speed / 3.6);
     }
 }

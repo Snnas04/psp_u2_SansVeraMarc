@@ -1,5 +1,6 @@
 package Race;
 
+
 public class HorseThread extends Thread {
     private Horse horse;
     private int distance;
@@ -22,20 +23,21 @@ public class HorseThread extends Thread {
     }
 
     public static int changeSpeed() {
-        int rnd = (int) (Math.random() * 5);
+        int rnd = (int) (Math.random() * 11) - 5; // Rango de -5 a 5
         return rnd;
     }
 
     @Override
     public void run() {
-        while (getDistance() < distance) {
-            horse.move();
-            try {
-                sleep(1000); // Simula un segundo de espera
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        try {
+            while (getDistance() < distance && !Thread.interrupted()) {
+                horse.move();
             }
+        } catch (Exception e) {
+            // Manejar la interrupción, si es necesario
+            System.out.println("Thread interrupted: " + e.getMessage());
         }
     }
+
 
 }
