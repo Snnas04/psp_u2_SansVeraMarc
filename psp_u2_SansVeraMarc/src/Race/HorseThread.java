@@ -4,6 +4,7 @@ package Race;
 public class HorseThread extends Thread {
     private Horse horse;
     private int distance;
+    public boolean isFinished = false;
 
     public HorseThread(Horse horse, int distance) {
         this.horse = horse;
