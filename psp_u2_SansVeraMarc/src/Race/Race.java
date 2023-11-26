@@ -34,13 +34,15 @@ public class Race {
 
         int time = 0;
         while (true) {
-            System.out.println("Second " + time + ":");
+            // Print the header for each second
+            System.out.print("\rSecond " + time + ":");
 
-            // Imprimir la posición de cada caballo en ese segundo
+            // Print the position of each horse in that second
             for (HorseThread horseThread : horseList) {
                 Horse horse = horseThread.getHorse();
-                System.out.println(horse.getName() + ": " + horseThread.getPosition() + "m at " + horse.getSpeed() + "km/h");
+                System.out.print("  " + horse.getName() + ": " + horseThread.getPosition() + "m at " + horse.getSpeed() + "km/h");
             }
+
 
             // Verificar si algún caballo ha completado la carrera en este segundo
             for (HorseThread horseThread : horseList) {
@@ -72,7 +74,7 @@ public class Race {
         }
 
         // Imprimir los caballos ganadores
-        System.out.print("\nWinning horses at the "+ info.getDistance() + " race: \n");
+        System.out.print("\nWinning horses of the "+ info.getDistance() + " race: \n");
         System.out.println("1st place: " + winners.get(0).getName());
         System.out.println("2nd place: " + winners.get(1).getName());
         System.out.println("3rd place: " + winners.get(2).getName());
@@ -87,6 +89,7 @@ public class Race {
             }
         }
     }
+
     // Nuevo método para interrumpir los hilos de los caballos
     private void interruptHorseThreads(List<HorseThread> horseList) {
         for (HorseThread horseThread : horseList) {
