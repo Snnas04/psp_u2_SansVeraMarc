@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="psp_u2_SansVeraMarc:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/psp_u2_SansVeraMarc_jar</output-path>
+    <root id="archive" name="psp_u2_SansVeraMarc.jar">
+      <element id="module-output" name="psp_u2_SansVeraMarc" />
+    </root>
+  </artifact>
+</component>
