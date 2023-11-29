@@ -24,14 +24,14 @@ public class Info {
         return this.distance;
     }
 
-    public static boolean raceState() {
+    public static boolean askToContinue() {
         Scanner scn = new Scanner(System.in);
-        System.out.println("Do you want to continue? (y/n)");
+        System.out.println("Tree horses have finished\nDo you want to continue? (y/n)");
         String answer = scn.nextLine();
         if (answer.equals("y")) {
-            return true;
+            return true; // race continues
         } else {
-            return false;
+            return false; // race ends
         }
     }
 }

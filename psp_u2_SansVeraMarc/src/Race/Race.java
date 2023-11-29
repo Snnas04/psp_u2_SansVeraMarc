@@ -47,15 +47,21 @@ public class Race {
         }
     }
 
-    public static void doContinue(List<HorseThread> horseList) {
+    public static void raceState(List<HorseThread> horseList) {
         if (Graphics.notifyRace() == true) {
-           var raceStat = Info.raceState();
+            try {
+                horseList.wait();
+                var raceStat = Info.askToContinue();
 
-           if (raceStat == false) {
-                interruptHorseThreads(horseList);
-           } else {
-               System.out.println("Race will continue!");
-           }
+                if (raceStat == false) {
+                    interruptHorseThreads(horseList);
+                } else {
+                    System.out.println("Race will continue!");
+                    horseList.notifyAll();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
