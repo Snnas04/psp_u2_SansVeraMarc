@@ -15,25 +15,9 @@ public class Graphics {
         int time = 0;
 
         while (true) {
-            // Print the header for each second
-            System.out.println("\nSecond " + time + ":");
-
-            // Print the position of each horse in that second
-            for (HorseThread horseThread : horseList) {
-                Horse horse = horseThread.getHorse();
-                var postitionFormat = String.format("%5s", horseThread.getPosition() + "m");
-                var nameFormat = String.format("%-8s", horse.getName());
-
-                var printLeaderBoard = String.format("%45s", nameFormat + ": " + postitionFormat + " at " + horse.getSpeed() + "km/h\n");
-
-                System.out.printf(printLeaderBoard);
-            }
-
-            // Print the progress bar for each horse
-            for (HorseThread horseThread : horseList) {
-                Horse horse = horseThread.getHorse();
-                printProgressBar(horse.getName(), horseThread.getPosition(), info.getDistance(), horse.getSpeed());
-            }
+            // Imprimir la carrera
+            printBoard(time, horseList, info);
+            time++;
 
             // Verificar si algún caballo ha completado la carrera en este segundo
             for (HorseThread horseThread : horseList) {
@@ -52,52 +36,55 @@ public class Graphics {
             if (stateRaceControl(completedHorses, horseList.size())) {
                 break;
             }
-
-            // Esperar un segundo antes de pasar al siguiente segundo
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            time++;
         }
 
-        printBoard(podio, finishedBoard, position, info);
+        printFinishBoard(podio, finishedBoard, position, info);
+    }
+
+    private void printBoard(int time, List<HorseThread> horseList, Info info) {
+        // Print the header for each second
+        System.out.println("\nSecond " + time + ":");
+
+        // Print the position of each horse in that second
+        for (HorseThread horseThread : horseList) {
+            Horse horse = horseThread.getHorse();
+            var postitionFormat = String.format("%5s", horseThread.getPosition() + "m");
+            var nameFormat = String.format("%-8s", horse.getName());
+
+            var printLeaderBoard = String.format("%45s", nameFormat + ": " + postitionFormat + " at " + horse.getSpeed() + "km/h\n");
+
+            System.out.printf(printLeaderBoard);
+        }
+
+        // Print the progress bar for each horse
+        for (HorseThread horseThread : horseList) {
+            Horse horse = horseThread.getHorse();
+            printProgressBar(horse.getName(), horseThread.getPosition(), info.getDistance(), horse.getSpeed());
+        }
+
+        // Esperar un segundo antes de pasar al siguiente segundo
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private static boolean stateRaceControl(int completedHorses, int horseListSize) {
         // Verificar si tres caballos han completado la carrera
         if (completedHorses == 3) {
             notifyRace();
-            if (Info.askToContinue() == false) {
+            if (!Info.askToContinue()) {
                 return true;
             }
         }
 
         // aturar la carrera si tots els cavalls han completat la carrera
-        if (completedHorses >= horseListSize) {
-            return true;
-        }
-        return false;
+        return completedHorses >= horseListSize;
     }
 
     public static boolean notifyRace() {
         return true;
-    }
-
-    private void printBoard(List<Horse> podio, List<Horse> finishedBoard, int position, Info info) {
-        // Imprimir los caballos ganadores
-        System.out.print("\nWinning horses of the " + info.getDistance() + " race: \n");
-        System.out.println("1st place: " + podio.get(0).getName());
-        System.out.println("2nd place: " + podio.get(1).getName());
-        System.out.println("3rd place: " + podio.get(2).getName());
-        System.out.println();
-        System.out.println("Finished Board: ");
-        for (Horse horse : finishedBoard) {
-            position++;
-            System.out.println(horse.getName() + " -> " + "P" + position);
-        }
     }
 
     private void printProgressBar(String horseName, int currentPosition, int totalDistance, int speed) {
@@ -130,6 +117,19 @@ public class Graphics {
         System.out.println("");
     }
 
+    private void printFinishBoard(List<Horse> podio, List<Horse> finishedBoard, int position, Info info) {
+        // Imprimir los caballos ganadores
+        System.out.print("\nWinning horses of the " + info.getDistance() + " race: \n");
+        System.out.println("1st place: " + podio.get(0).getName());
+        System.out.println("2nd place: " + podio.get(1).getName());
+        System.out.println("3rd place: " + podio.get(2).getName());
+        System.out.println();
+        System.out.println("Finished Board: ");
+        for (Horse horse : finishedBoard) {
+            position++;
+            System.out.println(horse.getName() + " -> " + "P" + position);
+        }
+    }
 
     private String speedIndicator(int speed) {
         if (speed >= 15 && speed <= 19) {
