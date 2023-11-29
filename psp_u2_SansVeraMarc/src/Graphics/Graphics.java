@@ -8,8 +8,8 @@ import java.util.List;
 
 public class Graphics {
     public void printRace(List<HorseThread> horseList, Info info) {
-        List<Horse> podio = new ArrayList<>(); // Lista para almacenar los caballos ganadores
-        List<Horse> finishedBoard = new ArrayList<>(); // Lista para almacenar los caballos que han completado la carrera
+        List<Horse> podioList = new ArrayList<>(); // Lista para almacenar los caballos ganadores
+        List<Horse> finishedList = new ArrayList<>(); // Lista para almacenar los caballos que han completado la carrera
         int position = 0;
         int completedHorses = 0; // Contador de caballos que han completado la carrera
         int time = 0;
@@ -24,10 +24,10 @@ public class Graphics {
                 if (horseThread.getPosition() >= info.getDistance() && !horseThread.isFinished) {
                     horseThread.isFinished = true;
                     completedHorses++;
-                    finishedBoard.add(horseThread.getHorse());
+                    finishedList.add(horseThread.getHorse());
                     // Almacenar el caballo ganador en la lista de ganadores
-                    if (podio.size() < 3) {
-                        podio.add(horseThread.getHorse());
+                    if (podioList.size() < 3) {
+                        podioList.add(horseThread.getHorse());
                     }
                 }
             }
@@ -38,7 +38,7 @@ public class Graphics {
             }
         }
 
-        printFinishBoard(podio, finishedBoard, position, info);
+        printFinishBoard(podioList, finishedList, position, info);
     }
 
     private void printBoard(int time, List<HorseThread> horseList, Info info) {
