@@ -19,7 +19,6 @@ public class Race {
         int numHorses = info.getNHorses();
         List<HorseThread> horseList = new ArrayList<>();
 
-
         // Crear y agrupar los hilos antes de iniciar
         for (int i = 0; i < numHorses; i++) {
             Horse horse = new Horse("Horse " + (i + 1), 50);
@@ -31,6 +30,7 @@ public class Race {
         for (HorseThread horseThread : horseList) {
             horseThread.start();
         }
+
 
         // Imprimir la carrera utilizan la clase Graphics
         Graphics graphics = new Graphics();
@@ -47,19 +47,31 @@ public class Race {
         }
     }
 
+    public static void doContinue(List<HorseThread> horseList) {
+        if (Graphics.notifyRace() == true) {
+           var raceStat = Info.raceState();
+
+           if (raceStat == false) {
+                interruptHorseThreads(horseList);
+           } else {
+               System.out.println("Race will continue!");
+           }
+        }
+    }
+
     // Nuevo método para interrumpir los hilos de los caballos
-    public static void interruptHorseThreads(List<HorseThread> horseList) {
+    private static void interruptHorseThreads(List<HorseThread> horseList) {
         for (HorseThread horseThread : horseList) {
             horseThread.interrupt();
         }
     }
 
     private boolean raceControl(Info info) {
-        if (info.getNHorses() < 10) {
-            System.out.println("Race has been canceled due to lack of horses\nIt require at least 10 horses to start a Race");
+        if (info.getNHorses() < 10 || info.getNHorses() > 20) {
+            System.out.println("Race has been canceled due to lack of horses\nIt require at least 10 horses with a maximum of 20 to start a Race");
             return false;
-        } else if (info.getDistance() < 100) {
-            System.out.println("Race has been canceled, due to lack of distance\nIt require at least 100m to start a Race");
+        } else if (info.getDistance() < 100 || info.getDistance() > 10000) {
+            System.out.println("Race has been canceled, due to lack of distance\nIt require at least 100m with a maximum of 10000m to start a Race");
             return false;
         } else {
             return true;

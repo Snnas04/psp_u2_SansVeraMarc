@@ -16,15 +16,6 @@ public class Info {
         this.distance = scn.nextInt();
     }
 
-//    public Info() {
-//        System.out.print("Enter the number of horses: ");
-//        this.nHorses = scn.nextInt();
-//        System.out.print("Enter the number of races: ");
-//        this.nRaces = scn.nextInt();
-//        System.out.print("Enter the laps per race: ");
-//        this.laps = scn.nextInt();
-//    }
-
     public int getNHorses() {
         return nHorses;
     }
@@ -33,11 +24,14 @@ public class Info {
         return this.distance;
     }
 
-//    public int getNRaces() {
-//        return this.nRaces;
-//    }
-//
-//    public int getLaps() {
-//        return this.laps;
-//    }
+    public static boolean raceState() {
+        Scanner scn = new Scanner(System.in);
+        System.out.println("Do you want to continue? (y/n)");
+        String answer = scn.nextLine();
+        if (answer.equals("y")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
