@@ -24,7 +24,7 @@ public class Info {
         return this.distance;
     }
 
-    public static boolean askToContinue() {
+    public synchronized static boolean askToContinue() {
         Scanner scn = new Scanner(System.in);
         System.out.println("Tree horses have finished\nDo you want to continue? (y/n)");
         String answer = scn.nextLine();

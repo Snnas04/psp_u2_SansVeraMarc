@@ -6,6 +6,8 @@ import Info.Info;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class Race {
     public Race() {
         Info info = new Info();
@@ -47,14 +49,15 @@ public class Race {
         }
     }
 
-    public static void raceState(List<HorseThread> horseList) {
+    public synchronized static void raceState(List<HorseThread> horseList) {
         if (Graphics.notifyRace() == true) {
             try {
                 horseList.wait();
                 var raceStat = Info.askToContinue();
 
                 if (raceStat == false) {
-                    interruptHorseThreads(horseList);
+                    System.out.println("Race has finished!");
+                    interruptHorseThreadList(horseList);
                 } else {
                     System.out.println("Race will continue!");
                     horseList.notifyAll();
@@ -66,7 +69,7 @@ public class Race {
     }
 
     // Nuevo método para interrumpir los hilos de los caballos
-    private static void interruptHorseThreads(List<HorseThread> horseList) {
+    private static void interruptHorseThreadList(List<HorseThread> horseList) {
         for (HorseThread horseThread : horseList) {
             horseThread.interrupt();
         }
