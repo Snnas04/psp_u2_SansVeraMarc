@@ -128,7 +128,7 @@ public class Graphics {
     private void printFinishBoard(List<Horse> podio, List<Horse> finishedBoard, int position, Info info) {
         systemClear();
         // Imprimir los caballos ganadores
-        System.out.print("\nPodio of the " + info.getDistance() + " race: \n");
+        System.out.print("\nPodio of the " + info.getDistance() + "m race: \n");
 
         System.out.println("");
         System.out.printf("%30s",podio.get(0).getName() + "\n");

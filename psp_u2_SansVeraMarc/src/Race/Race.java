@@ -12,7 +12,6 @@ public class Race {
     public Race() {
         Info info = new Info();
         if (raceControl(info)) {
-            System.out.println("Race has started!");
             theRace(info);
         }
     }
@@ -79,8 +78,8 @@ public class Race {
         if (info.getNHorses() < 10 || info.getNHorses() > 20) {
             System.out.println("Race has been canceled due to lack of horses\nIt require at least 10 horses with a maximum of 20 to start a Race");
             return false;
-        } else if (info.getDistance() < 100 || info.getDistance() > 10000) {
-            System.out.println("Race has been canceled, due to lack of distance\nIt require at least 100m with a maximum of 10000m to start a Race");
+        } else if (info.getDistance() < 1000 || info.getDistance() > 10000) {
+            System.out.println("Race has been canceled, due to lack of distance\nIt require at least 1000m with a maximum of 10000m to start a Race");
             return false;
         } else {
             return true;
