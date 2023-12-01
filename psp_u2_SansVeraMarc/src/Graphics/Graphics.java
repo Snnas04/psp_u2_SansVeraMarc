@@ -79,7 +79,7 @@ public class Graphics {
 
     private synchronized static boolean stateRaceControl(int completedHorses, int horseListSize) {
         // Verificar si tres caballos han completado la carrera
-        if (completedHorses >= 3) {
+        if (completedHorses == 3) {
             notifyRace();
 
             // aturar la carrera si l'usuari no vol continuar
