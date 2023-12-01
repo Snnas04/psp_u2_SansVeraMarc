@@ -5,8 +5,6 @@ import java.util.Scanner;
 public class Info {
     Scanner scn = new Scanner(System.in);
     private final int nHorses;
-//    private final int nRaces;
-//    private final int laps;
     private final int distance;
 
     public Info() {
