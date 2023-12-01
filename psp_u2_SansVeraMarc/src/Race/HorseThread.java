@@ -31,7 +31,7 @@ public class HorseThread extends Thread {
     @Override
     public void run() {
         try {
-            while (getDistance() < distance && !Thread.interrupted()) {
+            while (distance < horse.getDistance() && !Thread.interrupted()) {
                 horse.move();
             }
         } catch (Exception e) {

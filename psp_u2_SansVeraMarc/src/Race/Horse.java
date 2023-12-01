@@ -15,9 +15,9 @@ public class Horse {
     }
 
     public int getSpeed() {
-        if (speed > 70) {
+        if (speed >= 70) {
             speed = 70;
-        } else if (speed < 15) {
+        } else if (speed <= 15) {
             speed = 15;
         } else {
             speed += HorseThread.changeSpeed();
