@@ -55,10 +55,8 @@ public class Race {
                 var raceStat = Info.askToContinue();
 
                 if (raceStat == false) {
-                    System.out.println("Race has finished!");
                     interruptHorseThreadList(horseList);
                 } else {
-                    System.out.println("Race will continue!");
                     horseList.notifyAll();
                 }
             } catch (Exception e) {
